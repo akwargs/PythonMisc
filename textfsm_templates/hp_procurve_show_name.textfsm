@@ -1,0 +1,12 @@
+Value PORT (\S+)
+Value TYPE ((\S+)?)
+Value NAME ((\s*\S+.*\S)?)
+
+Start
+  ^\s*Port\s+Names\s*$$
+  ^\s*$$
+  ^\s+Port\s+Type\s+Name\s*$$
+  ^\s*-+(?:\s|-|\+)+$$
+  ^\s+${PORT}\s+${TYPE}\s+${NAME}\s*$$ -> Record
+  ^. -> Error
+

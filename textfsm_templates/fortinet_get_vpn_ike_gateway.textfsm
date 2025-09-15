@@ -1,0 +1,48 @@
+# vim:sw=2:ts=2:sts=2:tw=0
+Value NAME (\S+.*\d+)
+Value PEER_ADDR (\d+\.\d+\.\d+\.\d+)
+Value CREATED (\d+)
+Value XAUTH_USER (\S+)
+
+Start
+  ^config\s+vdom$$
+  ^\s*$$
+  ^FW.*$$
+  ^current.*$$
+  ^\s*$$
+  ^FW.*$$
+  ^\s*$$
+  # name: {interface}
+  ^name:\s+${NAME}$$
+  # version: 1
+  ^version:\s+\d$$
+  # interface: {interface}
+  ^interface:\s+\S+\d+\s+\d+$$
+  # addr: a.b.c.d:500 -> w.x.y.z:500
+  ^addr:\s+\d+.*\s+${PEER_ADDR}:\d+$$
+  # created: 24013s ago
+  ^created:\s+${CREATED}s\s+ago$$
+  # xauth-user: userid
+  ^xauth-user:\s+${XAUTH_USER}$$
+  # IKE SA  created: 1/1  established: 1/1  time: 30/30/30 ms
+  ^IKE.*$$
+  # IPsec SA  created: 1/1  established: 1/1  time: 30/30/30 ms
+  ^IPsec.*$$
+  #
+  ^\s*$$
+  #   id/spi: {data} {data}
+  ^\s+id.*$$
+  #   direction: responder
+  ^\s+direction.*$$
+  #   status: established 24013-24013s ago = 30ms
+  ^\s+status.*$$
+  #   proposal: aes-128-sha1
+  ^\s+proposal.*$$
+  #   key: {data}
+  ^\s+key.*$$
+  #   lifetime/rekey: 28800/4516
+  ^\s+lifetime.*$$
+  #   DPD sent/recv: 00000000/00000000
+  ^\s+DPD.*$$ -> Record
+  ^\s*$$
+  ^. -> Error

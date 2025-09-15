@@ -1,0 +1,16 @@
+# First line is the header fields for columns and is mandatory.
+# Regular expressions are supported in all fields except the first.
+# Last field supports variable length command completion.
+# abc[[xyz]] is expanded to abc(x(y(z)?)?)?, regexp inside [[]] is not supported
+#
+# Rules of Ordering:
+#  - OS in alphabetical order
+#  - Template name in length order
+#  - When Length is the same, use alphabetical order
+#  - Keep space between OS's
+#
+Template, Hostname, Platform, Command
+fortinet_get_vpn_ike_gateway.textfsm, .*, fortinet, get vpn ike gateway
+hp_procurve_show_interfaces_status.textfsm, .*, hp_procurve, show interfaces status
+hp_procurve_show_name.textfsm, .*, hp_procurve, show name
+cisco_nxos_show_mac.textfsm, .*, cisco_nxos, show mac address-table
